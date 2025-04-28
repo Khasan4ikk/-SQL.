@@ -118,3 +118,42 @@ GROUP BY passenger.name
 HAVING count >= 1
 ORDER BY count DESC, passenger.name ASC;
 ```
+<b> Task №17:Определить, сколько потратил в 2005 году каждый из членов семьи. В результирующей выборке не выводите тех членов семьи, которые ничего не потратили.</b>
+```
+SELECT member_name, status, SUM(Payments.amount * Payments.unit_price) AS costs
+FROM FamilyMembers
+JOIN Payments ON FamilyMembers.member_id = Payments.family_member
+WHERE YEAR(Payments.date) = 2005
+GROUP BY member_name, status;
+```
+
+<b> Task №18:Выведите имя самого старшего человека. Если таких несколько, то выведите их всех.</b>
+```
+SELECT member_name
+FROM FamilyMembers
+WHERE birthday = (
+    SELECT MIN(birthday)
+    FROM FamilyMembers);
+```
+<b> Task №19:Определить, кто из членов семьи покупал картошку (potato)</b>
+```
+select DISTINCT status from FamilyMembers
+JOIN Payments
+ON FamilyMembers.member_id=Payments.family_member
+JOIN Goods
+oN Payments.good=Goods.good_id
+WHERE Goods.good_name='potato'
+```
+<b> Task №20:Сколько и кто из семьи потратил на развлечения (entertainment). Вывести статус в семье, имя, сумму.</b>
+```
+SELECT status,
+member_name,
+SUM(Payments.amount * Payments.unit_price) as costs
+from FamilyMembers
+JOIN Payments
+ON FamilyMembers.member_id=Payments.family_member
+JOIN Goods ON Goods.good_id = Payments.good
+JOIN GoodTypes ON GoodTypes.good_type_id = Goods.type
+WHERE GoodTypes.good_type_name = 'entertainment'
+GROUP BY status, member_name;
+```
