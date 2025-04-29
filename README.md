@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/8e2e0955-3ad7-4193-af5b-6301e018a02c)# -SQL.
+# -SQL.
 Решение задач по SQL. Список задач https://sql-academy.org/ru/trainer
 
 <b>Task №1: Вывести имена всех когда-либо обслуживаемых пассажиров авиакомпаний.</b>
